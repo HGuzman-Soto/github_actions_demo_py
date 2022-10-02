@@ -10,15 +10,29 @@ const octokit = new Octokit({
 })
 
 async function test(){
-    await octokit.request("GET /repos/{owner}/{repo}/issues", {
+    const issues = await octokit.request("GET /repos/{owner}/{repo}/issues", {
         owner: "HGuzman-Soto",
         repo: "github_actions_demo_py",
     });
 
-    const test = await octokit.request('GET /repos/{owner}/{repo}/actions/artifacts', {
+    const artifacts = await octokit.request('GET /repos/{owner}/{repo}/actions/artifacts', {
         owner: 'HGuzman-Soto',
         repo: "github_actions_demo_py"
     })
-    console.log(test);
+    
+    const logs = await octokit.request('GET /repos/{owner}/{repo}/actions/jobs/{job_id}', {
+        owner: 'HGuzman-Soto',
+        repo: 'github_actions_demo_py',
+        job_id: '36090599'
+    })
+    console.logs(logs)
+
+    // const run = await octokit.request('POST /repos/{owner}/{repo}/actions/jobs/{job_id}/rerun', {
+    //     owner: 'HGuzman-Soto',
+    //     repo: 'github_actions_demo_py',
+    //     job_id: '5157017696'
+    //   })
+    // console.log(run)
+
 }
 test();
