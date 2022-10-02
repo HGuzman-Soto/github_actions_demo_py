@@ -14,5 +14,11 @@ async function test(){
         owner: "HGuzman-Soto",
         repo: "github_actions_demo_py",
     });
+
+    const test = await octokit.request('GET /repos/{owner}/{repo}/actions/artifacts', {
+        owner: 'HGuzman-Soto',
+        repo: "github_actions_demo_py"
+    })
+    console.log(test);
 }
 test();
